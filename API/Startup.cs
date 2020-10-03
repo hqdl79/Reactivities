@@ -81,7 +81,6 @@ namespace API
                 });
             });
             services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"]));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -130,6 +129,7 @@ namespace API
 
             app.UseAuthentication();
             app.UseAuthorization();
+
             //app.UseHttpsRedirection();
 
             app.UseEndpoints(endpoints =>

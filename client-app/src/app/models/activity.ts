@@ -24,6 +24,10 @@ export interface IActivityFormValues extends Partial<IActivity> {
     time?: Date;
 }
 
+export interface IActivityEnvelope{
+    activities: IActivity[];
+    activityCount: number;
+}
 export class ActivityFormValues implements IActivityFormValues {
     id?: string = undefined;
     title: string = '';
@@ -45,5 +49,6 @@ export interface IAttendee {
     username: string;
     displayName: string;
     image: string;
+    following?: boolean,
     isHost: boolean;
 }

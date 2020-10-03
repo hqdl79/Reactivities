@@ -14,7 +14,16 @@ interface Iprops extends RouteComponentProps<RouteParams>{}
 
  const ProfilePage: React.FC<Iprops> = ({match}) => {
      const rootStore = useContext(RootStoreContext);
-     const {profile,loadProfile, loadingProfile} = rootStore.profileStore;
+     const {
+       profile,
+       loadProfile,
+       loadingProfile,
+       follow,
+       unfollow,
+       isCurrentUser,
+       loading,
+       setActivityTab
+     } = rootStore.profileStore;
 
      useEffect(() => {
          loadProfile(match.params.username)
@@ -23,12 +32,18 @@ interface Iprops extends RouteComponentProps<RouteParams>{}
          if(loadingProfile) return <LoadingComponent content='Loading profile...' />
 
     return (
-        <Grid>
-            <Grid.Column width = {16}>
-                <ProfileHeader profile = {profile!} />
-                <ProfileContent />
-            </Grid.Column>
-        </Grid>
-    )
+      <Grid>
+        <Grid.Column width={16}>
+          <ProfileHeader
+            profile={profile!}
+            isCurrentUser={isCurrentUser}
+            loading={loading}
+            follow={follow}
+            unfollow={unfollow}
+          />
+          <ProfileContent setActivityTab = {setActivityTab} />
+        </Grid.Column>
+      </Grid>
+    );
 }
 export default observer(ProfilePage);
